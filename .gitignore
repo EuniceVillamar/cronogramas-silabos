@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Secretos y configuración local
+.env
+
+# Archivos generados por Django
+media/
+staticfiles/
+
+# Pruebas y herramientas
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Editores y sistema
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

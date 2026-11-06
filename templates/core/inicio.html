@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titulo %}Mis periodos{% endblock %}
+{% block contenido %}
+  <h1 class="h3 mb-3">Mis periodos</h1>
+  {% for periodo in periodos %}
+    <section class="card mb-3">
+      <div class="card-body">
+        <h2 class="h5">{{ periodo.nombre }}</h2>
+        <p class="text-secondary mb-2">{{ periodo.fecha_inicio }} – {{ periodo.fecha_fin }}</p>
+        <ul class="mb-0">
+          {% for materia in periodo.materias.all %}
+            <li>{{ materia.nombre }}</li>
+          {% empty %}
+            <li>Este periodo aún no tiene materias.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  {% empty %}
+    <p>Todavía no tienes periodos registrados.</p>
+  {% endfor %}
+{% endblock %}
