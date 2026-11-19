@@ -1,0 +1,180 @@
+{
+  "periodo": "CI 2026-2027",
+  "nota": "Etiquetado a mano desde el PDF. Las fechas se registran como estan escritas, incluso si el documento tiene un error.",
+  "eventos": [
+    {
+      "inicio": "2026-02-24",
+      "fin": "2026-02-24",
+      "tipo": "tramite",
+      "descripcion": "Registro de solicitudes en el sistema SIUG"
+    },
+    {
+      "inicio": "2026-03-09",
+      "fin": "2026-03-18",
+      "tipo": "matricula",
+      "descripcion": "Matrículas ordinarias."
+    },
+    {
+      "inicio": "2026-03-19",
+      "fin": "2026-03-24",
+      "tipo": "matricula",
+      "descripcion": "Matrículas extraordinarias."
+    },
+    {
+      "inicio": "2026-03-25",
+      "fin": "2026-03-31",
+      "tipo": "administrativo",
+      "descripcion": "Informe, revisión y cierre de paralelos de acuerdo a los resultados de la planificación académica."
+    },
+    {
+      "inicio": "2026-03-09",
+      "fin": "2026-03-31",
+      "tipo": "retiro",
+      "descripcion": "Retiro voluntario (online) de asignaturas (excepto plan modular Inglés)."
+    },
+    {
+      "inicio": "2026-03-30",
+      "fin": "2026-04-01",
+      "tipo": "matricula",
+      "descripcion": "Registro de solicitudes para matrículas especiales (online)."
+    },
+    {
+      "inicio": "2026-04-01",
+      "fin": "2026-04-01",
+      "tipo": "inicio_clases",
+      "descripcion": "Inicio de clases del 1er parcial (Incluido el día sábado)"
+    },
+    {
+      "inicio": "2026-05-18",
+      "fin": "2026-05-23",
+      "tipo": "examen",
+      "descripcion": "Toma y revisión de exámenes del 1er. parcial (Incluido el día sábado)"
+    },
+    {
+      "inicio": "2026-05-18",
+      "fin": "2026-05-31",
+      "tipo": "calificaciones",
+      "descripcion": "Ingreso de calificaciones del 1er. parcial."
+    },
+    {
+      "inicio": "2026-06-01",
+      "fin": "2026-06-01",
+      "tipo": "calificaciones",
+      "descripcion": "Último día para la entrega de actas de calificaciones del 1er. parcial en Secretaría."
+    },
+    {
+      "inicio": "2026-05-26",
+      "fin": "2026-05-26",
+      "tipo": "inicio_clases",
+      "descripcion": "Inicio de clases del 2do. parcial (Incluido el día sábado)"
+    },
+    {
+      "inicio": "2026-07-13",
+      "fin": "2026-07-18",
+      "tipo": "examen",
+      "descripcion": "Toma y revisión de exámenes del 2do. parcial (Incluido el día sábado)"
+    },
+    {
+      "inicio": "2026-07-13",
+      "fin": "2026-07-21",
+      "tipo": "calificaciones",
+      "descripcion": "Ingreso de calificaciones del 2do. parcial."
+    },
+    {
+      "inicio": "2026-07-22",
+      "fin": "2026-07-22",
+      "tipo": "calificaciones",
+      "descripcion": "Último día para la entrega de actas de calificaciones del 2do. parcial en Secretaría."
+    },
+    {
+      "inicio": "2026-07-22",
+      "fin": "2026-07-28",
+      "tipo": "recuperacion",
+      "descripcion": "Toma y revisión de exámenes de recuperación y mejoramiento."
+    },
+    {
+      "inicio": "2026-07-22",
+      "fin": "2026-07-30",
+      "tipo": "calificaciones",
+      "descripcion": "Ingreso de calificaciones de los exámenes de recuperación y mejoramiento."
+    },
+    {
+      "inicio": "2026-07-31",
+      "fin": "2026-07-31",
+      "tipo": "fin_periodo",
+      "descripcion": "Último día para la entrega de actas de calificaciones en Secretaría. Fin del PERIODO Académico Ordinario."
+    },
+    {
+      "inicio": "2026-02-26",
+      "fin": "2026-03-19",
+      "tipo": "docente",
+      "descripcion": "Desarrollo de actividades docentes planificadas en el PERIODO académico de transición (PAT)"
+    },
+    {
+      "inicio": "2026-06-02",
+      "fin": "2026-06-16",
+      "tipo": "docente",
+      "descripcion": "Heteroevaluación"
+    },
+    {
+      "inicio": "2026-06-02",
+      "fin": "2026-06-16",
+      "tipo": "docente",
+      "descripcion": "Autoevaluación"
+    },
+    {
+      "inicio": "2026-06-17",
+      "fin": "2026-07-01",
+      "tipo": "docente",
+      "descripcion": "Coevaluación autoridades y pares académicos"
+    },
+    {
+      "inicio": "2026-02-26",
+      "fin": "2026-07-31",
+      "tipo": "docente",
+      "descripcion": "Capacitaciones a los docentes (sincrónico y asincrónico, spooc) (Vicerrectordo académico y unidades académicas)"
+    },
+    {
+      "inicio": "2026-02-16",
+      "fin": "2026-02-17",
+      "tipo": "feriado",
+      "descripcion": "Feriado de Carnaval (Feriado nacional)"
+    },
+    {
+      "inicio": "2026-03-20",
+      "fin": "2026-03-31",
+      "tipo": "vacaciones",
+      "descripcion": "Vacaciones docentes (12 días)"
+    },
+    {
+      "inicio": "2026-04-03",
+      "fin": "2026-04-03",
+      "tipo": "feriado",
+      "descripcion": "Viernes santo. (Feriado nacional)"
+    },
+    {
+      "inicio": "2026-05-01",
+      "fin": "2026-05-01",
+      "tipo": "feriado",
+      "descripcion": "Día del trabajador (Feriado nacional 01 de mayo)"
+    },
+    {
+      "inicio": "2026-05-25",
+      "fin": "2026-05-25",
+      "tipo": "feriado",
+      "descripcion": "Batalla del Pichincha (Feriado nacional 24 de mayo)"
+    },
+    {
+      "inicio": "2026-07-24",
+      "fin": "2026-07-24",
+      "tipo": "feriado",
+      "descripcion": "Fundación de Guayaquil (Feriado local 25 de julio)"
+    },
+    {
+      "inicio": "2026-08-10",
+      "fin": "2026-08-10",
+      "tipo": "feriado",
+      "descripcion": "Primer Grito de Independencia (Feriado nacional 10 de agosto)."
+    }
+  ]
+}

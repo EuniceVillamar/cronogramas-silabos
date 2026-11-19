@@ -1,6 +1,6 @@
-# Análisis de formatos de sílabos
+# Análisis de formatos de sílabos y calendarios
 
-Documento del objetivo específico 1. Resume qué contienen los sílabos reales y define qué se puede extraer de ellos.
+Documento del objetivo específico 1. Resume qué contienen los sílabos y los calendarios académicos reales y define qué se puede extraer de cada uno.
 
 ## Muestra
 
@@ -26,7 +26,7 @@ Todos tienen texto seleccionable; ninguno necesita OCR.
 
 El extractor debe descartar ambas para no crear actividades falsas.
 
-Por eso las fechas del calendario saldrán del **calendario académico del periodo**, combinado con lo que sí trae el sílabo. La decisión está registrada en [decisiones.md](decisiones.md).
+Por eso las fechas se extraen del **calendario académico del periodo** (ver [Calendarios académicos](#calendarios-académicos)) y se combinan con lo que sí trae el sílabo. La decisión está registrada en [decisiones.md](decisiones.md).
 
 ## Estructura común
 
@@ -86,23 +86,72 @@ Se observaron con `pdfplumber`, el lector del proyecto.
 
 Si alguna comprobación falla, la extracción baja su confianza y pasa a revisión.
 
-## Cómo se obtienen las fechas
+## Calendarios académicos
 
-1. **Inicio y fin del periodo:** el estudiante los registra en la herramienta.
-2. **Fechas de evaluaciones:** salen del calendario académico del periodo y se registran una vez, para todas las materias.
-3. **Semanas de cada unidad:** se estiman repartiendo las semanas de clase en proporción a las horas ACD. Por ejemplo, en Estructura de Datos la unidad 3 tiene 18 de 48 horas, es decir, el 37,5 % del periodo.
-4. **Revisión:** toda fecha estimada se marca como tal y el estudiante la confirma antes de que entre al calendario.
+Muestra: los calendarios ordinarios CI y CII 2026-2027 de la Universidad de Guayaquil. Están en `tests/fixtures/calendarios/`, sin los metadatos de autor del PDF original, junto con su resultado etiquetado a mano.
 
-## Formas de escribir fechas
+### Estructura
+
+Ambos son una tabla de dos columnas: **fecha** y **actividad**. Las filas sin actividad son títulos de sección, y las que empiezan con `NOTA` son aclaraciones.
+
+| Sección | Uso para el estudiante |
+|---|---|
+| Cambio de carrera | Trámite |
+| Matriculación | Matrículas, retiros |
+| Clases, exámenes e ingreso de calificaciones | Inicio de cada parcial, exámenes, recuperación, fin del periodo |
+| Otras actividades docentes, evaluación docente, capacitación docente | No se usan |
+| Vacaciones y feriados | Días sin clases |
+
+### Diferencias entre los dos formatos
+
+| | CI 2026-2027 | CII 2026-2027 |
+|---|---|---|
+| Tablas | Una por sección, seis en total | Una sola tabla que continúa en la página 2 |
+| Nombre de la sección de exámenes | Clases - Exámenes - Ingreso de calificaciones | Exámenes y actividades docentes |
+| Fecha de portada | `01 DE ABRIL DE 2026` | `12 DE OCTUBRE DE 2026` |
+
+El extractor no depende del número de tablas: recorre las filas en orden y recuerda la sección vigente aunque cambie de página.
+
+### Formas de escribir fechas
+
+| Forma | Ejemplo |
+|---|---|
+| Fecha única | `01 de abril de 2026`, `26 de mayo del 2026` |
+| Rango en un mes | `Del 18 al 23 de mayo de 2026` |
+| Rango entre meses | `Del 30 de noviembre al 05 de diciembre de 2026` |
+| Rango entre años | `Del 01 de septiembre de 2026 al 25 de febrero de 2027` |
+| Con día de la semana | `Lunes 16 al martes 17 de febrero de 2026`, `Del Miercoles 23 de septiembre…` |
+| Días unidos por "y" | `Lunes 08 y martes 09 de febrero de 2027` |
+| Con anotación | `… de 2027 (Durante todo el ciclo académico)` |
+
+### Errores del propio documento
+
+| Fila | Problema | Tratamiento |
+|---|---|---|
+| `Viernes 9 de octubre de 2025` en CII 2026-2027 | El año está fuera del periodo y el 9/10/2025 fue jueves | Se marca, se sugiere el 09/10/2026 y no entra al `.ics` |
+| `Viernes 25 de diciembre de 2026` en CII | La fila quedó sin descripción al partirse entre páginas | Se incluye como "Feriado" y se marca para revisar |
+
+### Precisión
+
+Con el resultado etiquetado a mano, el extractor obtiene **29 de 29 fechas correctas en cada calendario**: 100 % de precisión y de cobertura. CI exige al menos 85 % en ambas medidas.
+
+## Cómo se arma el calendario del estudiante
+
+1. **Fechas de la universidad:** salen del calendario académico. Se descartan las actividades solo para docentes.
+2. **Semanas de cada unidad:** los días de clase de cada parcial se reparten en proporción a las horas ACD de las unidades. Por ejemplo, en Estructura de Datos la unidad 3 tiene 18 de 48 horas, es decir, el 37,5 % de los días de clase.
+3. **Temas de cada examen:** una unidad entra en el parcial donde cae la mitad de sus horas.
+4. **Recordatorios de repaso:** una cantidad de días antes de cada semana de exámenes, configurable y de 7 por defecto, con los temas de las unidades que entran.
+5. **Revisión:** las fechas estimadas se marcan como tales y la vista previa muestra todo antes de descargar el `.ics`.
+
+## Formas de escribir fechas en el sílabo
 
 | Forma | Ejemplo | Dónde aparece | Tratamiento |
 |---|---|---|---|
 | `dd/mm/aaaa` | `07/04/2026` | Pie de página | Descartar |
 | `dd/mm/aaaa hh:mm:ss` | Fecha de una firma | Sección G | Descartar |
-| Horas por unidad | `ACD: 18` | Sección D | Convertir en semanas estimadas |
+| Horas por unidad | `ACD: 18` | Sección D | Convertir en días estimados |
 
 ## Pendientes
 
 - Ampliar la muestra con sílabos de otras carreras y facultades para confirmar que usan la misma plantilla.
-- Conseguir el calendario académico oficial del periodo y definir cómo se registra.
-- Reformular el objetivo 2: la precisión del 85 % debe medirse sobre los campos extraídos del sílabo, porque el sílabo no contiene fechas.
+- Conseguir calendarios de otros periodos para ampliar la medición de precisión.

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block titulo %}Calendario {{ plan.periodo }}{% endblock %}
+{% block contenido %}
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+    <div>
+      <h1 class="h3 mb-1">Calendario {{ plan.periodo }}</h1>
+      <p class="text-secondary mb-0">{{ plan.eventos|length }} eventos listos. Revísalos antes de importarlos.</p>
+    </div>
+    <div class="d-flex gap-2">
+      <a class="btn btn-outline-secondary" href="{% url 'generar_calendario' %}">Generar otro</a>
+      <a class="btn btn-primary" href="{% url 'descargar_calendario' %}">Descargar .ics</a>
+    </div>
+  </div>
+
+  {% if plan.omitidos or plan.advertencias %}
+    <section class="alert alert-warning">
+      <h2 class="h6">Revisa esto</h2>
+      <ul class="mb-0">
+        {% for evento in plan.omitidos %}
+          <li>No se incluyó “{{ evento.descripcion }}” ({{ evento.texto_fecha }}): {{ evento.advertencia }}</li>
+        {% endfor %}
+        {% for aviso in plan.advertencias %}
+          <li>{{ aviso }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  <div class="table-responsive card">
+    <table class="table table-sm align-top mb-0">
+      <thead>
+        <tr><th>Fecha</th><th>Evento</th><th>Tipo</th><th>Recordatorio</th></tr>
+      </thead>
+      <tbody>
+        {% for evento in plan.eventos %}
+          <tr>
+            <td class="text-nowrap">
+              {{ evento.rango.inicio|date:"d/m/Y" }}{% if evento.rango.dias > 1 %} – {{ evento.rango.fin|date:"d/m/Y" }}{% endif %}
+            </td>
+            <td>
+              <details>
+                <summary>{{ evento.titulo }}</summary>
+                <div class="small text-secondary mt-2" style="white-space: pre-line">{{ evento.descripcion }}</div>
+              </details>
+            </td>
+            <td><span class="badge text-bg-light border">{{ evento.categoria }}</span></td>
+            <td>{% if evento.recordatorio is not None %}Sí{% endif %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
