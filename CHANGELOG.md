@@ -17,6 +17,7 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y l
 - Generación del calendario `.ics` con exámenes, inicio estimado de unidades y recordatorios de repaso.
 - Pantalla para subir el calendario y los sílabos, con vista previa, y comando `generar_calendario`.
 - Medición de precisión del extractor de calendarios en CI.
+- Nueva interfaz con la paleta del proyecto: portada pública, semana destacada del calendario generado y formularios rediseñados.
 
 ### Eliminado
 

@@ -1,27 +1,54 @@
-<!doctype html>
+{% load static %}<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block titulo %}Cronogramas{% endblock %}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>{% block titulo %}Cronogramas{% endblock %} · cronogramas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Caveat:wght@700&family=Fredoka:wght@700&family=Instrument+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
-<body class="bg-light">
-  <nav class="navbar bg-white border-bottom mb-4">
-    <div class="container">
-      <a class="navbar-brand" href="{% url 'inicio' %}">Cronogramas</a>
-      {% if user.is_authenticated %}
-        <form method="post" action="{% url 'logout' %}" class="d-flex align-items-center gap-3">
-          {% csrf_token %}
-          <a class="btn btn-primary btn-sm" href="{% url 'generar_calendario' %}">Generar calendario</a>
-          <span class="text-secondary">{{ user.username }}</span>
-          <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
-        </form>
-      {% endif %}
-    </div>
-  </nav>
-  <main class="container">
+<body>
+  <svg class="oculto" aria-hidden="true">
+    <symbol id="icono-examen" viewBox="0 0 24 24"><path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3"/></symbol>
+    <symbol id="icono-repaso" viewBox="0 0 24 24"><path d="M3 5.5C5.5 4 8.5 4 12 6c3.5-2 6.5-2 9-.5V19c-2.5-1.5-5.5-1.5-9 .5-3.5-2-6.5-2-9-.5z"/><path d="M12 6v13.5"/></symbol>
+    <symbol id="icono-unidad" viewBox="0 0 24 24"><path d="M7 3h10v18l-5-4-5 4z"/></symbol>
+    <symbol id="icono-evaluacion" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 10l2 2 4-4"/><path d="M9 16h6"/></symbol>
+    <symbol id="icono-universidad" viewBox="0 0 24 24"><path d="M3 9.5L12 4l9 5.5"/><path d="M5.5 10v7.5M10 10v7.5M14 10v7.5M18.5 10v7.5"/><path d="M3 20h18"/></symbol>
+  </svg>
+
+  <header class="cabecera">
+    <nav class="contenedor cabecera__nav" aria-label="Principal">
+      <div class="cabecera__lado">
+        <a href="{% url 'generar_calendario' %}">Generar calendario</a>
+        {% if user.is_authenticated %}<a href="{% url 'inicio' %}#semana">Mi semana</a>{% endif %}
+      </div>
+      <a class="logo" href="{% url 'inicio' %}">cronogramas</a>
+      <div class="cabecera__lado cabecera__lado--derecha">
+        {% if user.is_authenticated %}
+          <span class="cabecera__usuario">{{ user.username }}</span>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="boton-enlace" type="submit">Cerrar sesión</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}">Iniciar sesión</a>
+          <a href="{% url 'registro' %}">Crear cuenta</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main>
     {% block contenido %}{% endblock %}
   </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <span class="logo">cronogramas</span>
+      <p>Hecho para estudiantes de la Universidad de Guayaquil a partir del calendario académico y los sílabos.</p>
+    </div>
+  </footer>
 </body>
 </html>

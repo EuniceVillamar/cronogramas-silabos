@@ -1,40 +1,43 @@
 {% extends "base.html" %}
 {% block titulo %}Generar calendario{% endblock %}
 {% block contenido %}
-  <div class="row justify-content-center">
-    <div class="col-lg-7">
-      <h1 class="h3 mb-2">Generar calendario</h1>
-      <p class="text-secondary">
-        Sube el calendario académico y los sílabos de tus materias. Recibirás un archivo
-        <code>.ics</code> con las fechas de la universidad, los exámenes, el inicio estimado de cada
-        unidad y recordatorios para repasar.
-      </p>
-      {% for mensaje in messages %}
-        <div class="alert alert-info">{{ mensaje }}</div>
-      {% endfor %}
-      <form method="post" enctype="multipart/form-data" class="card card-body gap-3">
-        {% csrf_token %}
-        {% for campo in form %}
-          <div>
-            <label class="form-label fw-semibold" for="{{ campo.id_for_label }}">{{ campo.label }}</label>
-            <input
-              class="form-control{% if campo.errors %} is-invalid{% endif %}"
-              id="{{ campo.id_for_label }}"
-              name="{{ campo.html_name }}"
-              {% if campo.name == "dias_repaso" %}
-                type="number" min="1" max="21" value="{{ campo.value|default_if_none:7 }}"
-              {% else %}
-                type="file" accept="application/pdf"{% if campo.name == "silabos" %} multiple{% endif %}
-              {% endif %}
-              {% if campo.field.required %}required{% endif %}>
-            {% if campo.help_text %}<div class="form-text">{{ campo.help_text }}</div>{% endif %}
-            {% for error in campo.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
-          </div>
-        {% endfor %}
-        <div>
-          <button class="btn btn-primary" type="submit">Generar calendario</button>
+  <section class="pagina-formulario papel">
+    <div class="contenedor">
+      <div class="hoja">
+        <div class="hoja__titulo">
+          <h1>Generar calendario</h1>
+          <p class="hoja__bajada">
+            Sube el calendario académico del periodo y los sílabos de tus materias. Antes de
+            descargar verás cada evento.
+          </p>
         </div>
-      </form>
+        {% for mensaje in messages %}
+          <p class="mensaje">{{ mensaje }}</p>
+        {% endfor %}
+        <form method="post" enctype="multipart/form-data" class="formulario">
+          {% csrf_token %}
+          {% for campo in form %}
+            {% if campo.name == "dias_repaso" %}
+              <div class="campo">
+                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                <input id="{{ campo.id_for_label }}" name="{{ campo.html_name }}" type="number" min="1" max="21" value="{{ campo.value|default_if_none:7 }}" required aria-describedby="ayuda-{{ campo.name }}">
+                <p class="ayuda" id="ayuda-{{ campo.name }}">El recordatorio para repasar llega esta cantidad de días antes de cada semana de exámenes.</p>
+                {% for error in campo.errors %}<p class="error">{{ error }}</p>{% endfor %}
+              </div>
+            {% else %}
+              <div class="zona-archivo{% if campo.errors %} zona-archivo--error{% endif %}">
+                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                <p class="ayuda" id="ayuda-{{ campo.name }}">{{ campo.help_text }}</p>
+                <input id="{{ campo.id_for_label }}" name="{{ campo.html_name }}" type="file" accept="application/pdf"{% if campo.name == "silabos" %} multiple{% endif %}{% if campo.field.required %} required{% endif %} aria-describedby="ayuda-{{ campo.name }}">
+                {% for error in campo.errors %}<p class="error">{{ error }}</p>{% endfor %}
+              </div>
+            {% endif %}
+          {% endfor %}
+          <div class="formulario__pie">
+            <button class="boton" type="submit">Generar calendario</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  </section>
 {% endblock %}

@@ -13,6 +13,8 @@
 | 9 | El `.ics` se genera al vuelo y se guarda solo en la sesión | Entrega el resultado sin esperar al modelo de calendario compartido |
 | 10 | Los temas de un sílabo se leen recortando la columna "Contenidos" por coordenadas | Las tablas extraídas pierden esa columna en las páginas de continuación |
 | 11 | Los PDF de calendario se versionan como muestra; los sílabos no | Los calendarios son públicos, y los sílabos tienen nombres de docentes |
+| 12 | Hoja de estilos propia en `static/css/app.css`, sin Bootstrap | La interfaz sigue un diseño de referencia con la paleta #593C4F, #241426, #454259, #F2E5E4 y #8C6464 |
+| 13 | La portada es pública y muestra una semana de ejemplo | Quien llega sin cuenta entiende qué hace la herramienta antes de registrarse |
 
 ## Pendientes
 

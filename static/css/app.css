@@ -1,0 +1,1133 @@
+/*
+  Cronogramas: papel cuadriculado, hoja de calendario de taco y sellos.
+  Un solo tema claro. La paleta viene de la marca; los tonos intermedios se mezclan desde ella.
+*/
+:root {
+  color-scheme: light;
+  --papel: #f2e5e4;
+  --ciruela: #593c4f;
+  --noche: #241426;
+  --pizarra: #454259;
+  --malva: #8c6464;
+
+  --hoja: color-mix(in srgb, var(--papel) 45%, #fff);
+  --rosa-medio: color-mix(in srgb, var(--papel) 72%, var(--malva));
+  --rejilla: color-mix(in srgb, var(--malva) 16%, transparent);
+  --texto-suave: color-mix(in srgb, var(--noche) 72%, var(--papel));
+
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans: "Albert Sans", "Segoe UI", system-ui, sans-serif;
+  --logo: "Fredoka", "Albert Sans", system-ui, sans-serif;
+  --mano: "Caveat", "Segoe Print", cursive;
+
+  --ancho: 1120px;
+  --borde: 2px solid var(--ciruela);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--noche);
+  font: 400 1rem/1.6 var(--sans);
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: var(--ciruela);
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--pizarra);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.02;
+  color: var(--ciruela);
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+.contenedor {
+  width: min(var(--ancho), 100% - 32px);
+  margin-inline: auto;
+}
+
+.papel {
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(var(--rejilla) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rejilla) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.etiqueta {
+  font: 600 0.75rem/1.2 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ciruela);
+}
+
+.mano {
+  font-family: var(--mano);
+  font-weight: 700;
+  color: var(--ciruela);
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* --- Botones --------------------------------------------------------------------------- */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--ciruela);
+  border-radius: 999px;
+  padding: 10px 20px;
+  background: var(--ciruela);
+  color: var(--papel);
+  font: 700 0.78rem/1 var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: var(--noche);
+  border-color: var(--noche);
+}
+
+.boton--claro {
+  background: transparent;
+  color: var(--ciruela);
+}
+
+.boton--claro:hover {
+  background: var(--ciruela);
+  color: var(--papel);
+}
+
+.boton-enlace {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* --- Cabecera con borde festoneado -------------------------------------------------------- */
+
+.cabecera {
+  position: relative;
+  z-index: 2;
+  background: var(--rosa-medio);
+}
+
+.cabecera::after {
+  content: "";
+  position: absolute;
+  inset: 100% 0 auto;
+  height: 12px;
+  background: radial-gradient(circle at 12px 0, var(--rosa-medio) 12px, transparent 12.5px) 0 0 /
+    24px 12px repeat-x;
+}
+
+.cabecera__nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+}
+
+.cabecera__lado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  font: 600 0.74rem/1.2 var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cabecera__lado--derecha {
+  justify-content: flex-end;
+}
+
+.cabecera__lado a,
+.cabecera__lado .boton-enlace {
+  color: var(--ciruela);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.cabecera__lado a:hover,
+.cabecera__lado .boton-enlace:hover {
+  text-decoration: underline;
+}
+
+.cabecera__usuario {
+  color: var(--texto-suave);
+}
+
+.logo {
+  font: 700 1.9rem/1 var(--logo);
+  letter-spacing: -0.02em;
+  color: var(--ciruela);
+  text-decoration: none;
+}
+
+/* --- Hero ----------------------------------------------------------------------------------- */
+
+.hero {
+  padding: 72px 0 88px;
+  overflow: hidden;
+}
+
+.hero__rejilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 40px;
+}
+
+.hero__texto {
+  position: relative;
+  display: grid;
+  gap: 22px;
+  align-content: start;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6.4vw, 5.4rem);
+}
+
+.hero__bajada {
+  max-width: 34ch;
+  font-size: 1.05rem;
+  color: var(--texto-suave);
+}
+
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.hero__nota {
+  position: absolute;
+  right: 4%;
+  bottom: -64px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  transform: rotate(-5deg);
+}
+
+.hero__nota svg {
+  width: 120px;
+  height: 56px;
+  fill: none;
+  stroke: var(--ciruela);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.hero__ilustracion {
+  justify-self: center;
+  width: min(100%, 460px);
+}
+
+.hoja-ilustracion {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hi-sombra {
+  fill: var(--ciruela);
+}
+
+.hi-hoja {
+  fill: var(--hoja);
+  stroke: var(--ciruela);
+  stroke-width: 3;
+}
+
+.hi-banda {
+  fill: var(--ciruela);
+}
+
+.hi-anillo {
+  fill: var(--noche);
+}
+
+.hi-mes {
+  font: 400 40px/1 var(--serif);
+  fill: var(--papel);
+}
+
+.hi-anio {
+  font: 600 12px/1 var(--sans);
+  letter-spacing: 0.14em;
+  fill: var(--rosa-medio);
+}
+
+.hi-inicial {
+  font: 700 13px/1 var(--sans);
+  fill: var(--malva);
+}
+
+.hi-dia {
+  font: 500 17px/1 var(--sans);
+  fill: var(--noche);
+}
+
+.hi-dia--feriado {
+  fill: var(--malva);
+}
+
+.hi-trazo {
+  fill: none;
+  stroke: var(--pizarra);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.hi-nota {
+  font: 700 24px/1 var(--mano);
+  fill: var(--pizarra);
+}
+
+.hi-flecha {
+  fill: none;
+  stroke: var(--pizarra);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hi-estrella {
+  fill: var(--malva);
+}
+
+.hi-lapiz {
+  fill: var(--pizarra);
+}
+
+.hi-punta {
+  fill: var(--noche);
+}
+
+/* --- Hoja de taco: tarjeta con agujeros arriba ------------------------------------------------ */
+
+.hoja {
+  position: relative;
+  border: var(--borde);
+  border-radius: 6px;
+  background: var(--hoja);
+  padding: 48px clamp(16px, 4vw, 48px) 36px;
+}
+
+.hoja::before {
+  content: "";
+  position: absolute;
+  inset: -13px 18px auto;
+  height: 26px;
+  background: radial-gradient(circle, var(--agujero, var(--ciruela)) 12px, transparent 12.5px) 0 0 /
+    34px 26px repeat-x;
+}
+
+.hoja__titulo {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.hoja__titulo h1,
+.hoja__titulo h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.hoja__bajada {
+  max-width: 60ch;
+  color: var(--texto-suave);
+}
+
+.hoja__vacio {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* --- Franja "Esta semana" ------------------------------------------------------------------- */
+
+.franja {
+  padding: 64px 0;
+}
+
+.franja--ciruela {
+  background: var(--ciruela);
+  --agujero: var(--ciruela);
+}
+
+.franja--pizarra {
+  background: var(--pizarra);
+}
+
+.semana {
+  overflow-x: auto;
+}
+
+.semana__rejilla {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(104px, 1fr));
+  min-width: 728px;
+  border: var(--borde);
+}
+
+.dia {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  min-height: 168px;
+  padding: 10px;
+  border-right: var(--borde);
+}
+
+.dia:last-child {
+  border-right: 0;
+}
+
+.dia__fecha {
+  display: flex;
+  justify-content: space-between;
+  font: 700 0.7rem/1.25 var(--sans);
+  letter-spacing: 0.06em;
+  color: var(--ciruela);
+}
+
+.dia--hoy {
+  background: var(--ciruela);
+}
+
+.dia--hoy .dia__fecha,
+.dia--hoy .dia__evento,
+.dia--hoy .dia__vacio {
+  color: var(--papel);
+}
+
+.dia__eventos {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.dia__evento {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  line-height: 1.25;
+  color: var(--ciruela);
+}
+
+.dia__vacio {
+  align-self: center;
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+}
+
+.dia__mas {
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--papel);
+  background: var(--malva);
+}
+
+.icono svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icono--examen {
+  background: var(--ciruela);
+}
+
+.icono--repaso {
+  background: var(--pizarra);
+}
+
+.icono--unidad {
+  background: var(--malva);
+}
+
+.icono--evaluacion {
+  background: var(--noche);
+}
+
+.icono--universidad {
+  background: var(--rosa-medio);
+  color: var(--ciruela);
+}
+
+.dia--hoy .icono {
+  box-shadow: 0 0 0 2px var(--papel);
+}
+
+.semana__pie {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.aviso-pildora {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 24px;
+  margin-top: 28px;
+  padding: 16px 24px;
+  border-radius: 20px;
+  background: var(--rosa-medio);
+  color: var(--ciruela);
+  text-align: center;
+}
+
+.aviso-pildora p {
+  font: 600 0.8rem/1.4 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* --- Sección de beneficios con rayas y sellos --------------------------------------------- */
+
+.dividida {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.dividida__texto {
+  display: grid;
+  align-content: center;
+  gap: 22px;
+  padding: 72px clamp(16px, 5vw, 64px);
+}
+
+.dividida__texto h2 {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+}
+
+.dividida__texto > p {
+  max-width: 44ch;
+  color: var(--texto-suave);
+}
+
+.rayas {
+  display: grid;
+  place-items: center;
+  padding: 64px 24px;
+  background: repeating-linear-gradient(90deg, var(--rosa-medio) 0 14px, var(--papel) 14px 28px);
+}
+
+.sellos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.sello {
+  display: grid;
+  place-content: center;
+  width: 108px;
+  height: 108px;
+  text-align: center;
+  color: var(--papel);
+  -webkit-mask: var(--forma) center / contain no-repeat;
+  mask: var(--forma) center / contain no-repeat;
+}
+
+.sello strong {
+  font: 400 2rem/1 var(--serif);
+}
+
+.sello span {
+  font: 700 0.62rem/1.2 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sello--flor {
+  background: var(--malva);
+  --forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40'/%3E%3Ccircle cx='90' cy='50' r='10'/%3E%3Ccircle cx='84.6' cy='70' r='10'/%3E%3Ccircle cx='70' cy='84.6' r='10'/%3E%3Ccircle cx='50' cy='90' r='10'/%3E%3Ccircle cx='30' cy='84.6' r='10'/%3E%3Ccircle cx='15.4' cy='70' r='10'/%3E%3Ccircle cx='10' cy='50' r='10'/%3E%3Ccircle cx='15.4' cy='30' r='10'/%3E%3Ccircle cx='30' cy='15.4' r='10'/%3E%3Ccircle cx='50' cy='10' r='10'/%3E%3Ccircle cx='70' cy='15.4' r='10'/%3E%3Ccircle cx='84.6' cy='30' r='10'/%3E%3C/svg%3E");
+}
+
+.sello--nube {
+  background: var(--noche);
+  --forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34'/%3E%3Ccircle cx='50' cy='17' r='17'/%3E%3Ccircle cx='83' cy='50' r='17'/%3E%3Ccircle cx='50' cy='83' r='17'/%3E%3Ccircle cx='17' cy='50' r='17'/%3E%3Ccircle cx='73.3' cy='26.7' r='17'/%3E%3Ccircle cx='73.3' cy='73.3' r='17'/%3E%3Ccircle cx='26.7' cy='73.3' r='17'/%3E%3Ccircle cx='26.7' cy='26.7' r='17'/%3E%3C/svg%3E");
+}
+
+.sello--pastilla {
+  background: var(--rosa-medio);
+  color: var(--ciruela);
+  --forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='6' y='6' width='88' height='88' rx='22'/%3E%3Ccircle cx='28' cy='8' r='8'/%3E%3Ccircle cx='50' cy='8' r='8'/%3E%3Ccircle cx='72' cy='8' r='8'/%3E%3Ccircle cx='28' cy='92' r='8'/%3E%3Ccircle cx='50' cy='92' r='8'/%3E%3Ccircle cx='72' cy='92' r='8'/%3E%3Ccircle cx='8' cy='28' r='8'/%3E%3Ccircle cx='8' cy='50' r='8'/%3E%3Ccircle cx='8' cy='72' r='8'/%3E%3Ccircle cx='92' cy='28' r='8'/%3E%3Ccircle cx='92' cy='50' r='8'/%3E%3Ccircle cx='92' cy='72' r='8'/%3E%3C/svg%3E");
+}
+
+.polaroid {
+  position: relative;
+  width: min(100%, 360px);
+  padding: 22px 22px 26px;
+  border: var(--borde);
+  border-radius: 4px;
+  background: var(--hoja);
+  transform: rotate(-3deg);
+  box-shadow: 10px 10px 0 var(--ciruela);
+}
+
+.polaroid::before,
+.polaroid::after {
+  content: "";
+  position: absolute;
+  width: 74px;
+  height: 22px;
+  background: color-mix(in srgb, var(--malva) 80%, transparent);
+}
+
+.polaroid::before {
+  top: -10px;
+  left: -18px;
+  transform: rotate(-32deg);
+}
+
+.polaroid::after {
+  right: -16px;
+  bottom: -6px;
+  transform: rotate(-28deg);
+}
+
+.polaroid__fecha {
+  font: 700 0.7rem/1.2 var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--malva);
+}
+
+.polaroid h3 {
+  margin: 6px 0 14px;
+  font-size: 1.7rem;
+}
+
+.polaroid ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+
+.polaroid__firma {
+  position: absolute;
+  right: -10px;
+  bottom: -46px;
+  padding: 6px 14px;
+  border: 1.5px solid var(--ciruela);
+  border-radius: 4px;
+  background: var(--hoja);
+  font: 700 1.25rem/1.1 var(--mano);
+  color: var(--ciruela);
+  transform: rotate(6deg);
+}
+
+.cuadros {
+  height: 26px;
+  background:
+    conic-gradient(var(--ciruela) 25%, var(--rosa-medio) 0 50%, var(--ciruela) 0 75%, var(--rosa-medio) 0)
+    0 0 / 26px 26px;
+}
+
+/* --- Nube festoneada en la franja pizarra ------------------------------------------------- */
+
+.nube {
+  position: relative;
+  margin: 24px 0;
+  padding: 56px clamp(20px, 5vw, 72px);
+  background: var(--papel);
+  text-align: center;
+}
+
+.nube::before,
+.nube::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: radial-gradient(circle at 20px 20px, var(--papel) 20px, transparent 20.5px) 0 0 /
+    40px 40px repeat-x;
+}
+
+.nube::before {
+  top: -20px;
+}
+
+.nube::after {
+  bottom: -20px;
+}
+
+.nube h2 {
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  margin: 12px 0 36px;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: paso;
+  text-align: left;
+}
+
+.pasos li {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  gap: 8px;
+  counter-increment: paso;
+}
+
+.pasos li::before {
+  content: counter(paso);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--pizarra);
+  color: var(--papel);
+  font: 400 1.5rem/1 var(--serif);
+}
+
+.pasos strong {
+  display: block;
+  font: 400 1.5rem/1.1 var(--serif);
+  color: var(--ciruela);
+}
+
+.pasos p {
+  color: var(--texto-suave);
+}
+
+/* --- Periodos ------------------------------------------------------------------------------- */
+
+.periodos {
+  padding: 64px 0;
+}
+
+.periodos h2 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+.periodos__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.periodo {
+  padding: 20px;
+  border: var(--borde);
+  border-radius: 6px;
+  background: var(--hoja);
+}
+
+.periodo h3 {
+  font-size: 1.6rem;
+}
+
+.periodo p {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+/* --- Formularios ---------------------------------------------------------------------------- */
+
+.pagina-formulario {
+  padding: 72px 0 96px;
+}
+
+.pagina-formulario .hoja {
+  width: min(640px, 100%);
+  margin-inline: auto;
+}
+
+.formulario {
+  display: grid;
+  gap: 20px;
+}
+
+.formulario p,
+.campo {
+  display: grid;
+  gap: 6px;
+}
+
+.formulario label {
+  font-weight: 600;
+  color: var(--ciruela);
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario input[type="password"],
+.formulario input[type="number"] {
+  width: 100%;
+  padding: 11px 14px;
+  border: var(--borde);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--noche);
+  font: inherit;
+}
+
+.formulario .helptext,
+.formulario .ayuda,
+.formulario ul {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.formulario ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.formulario .errorlist,
+.error {
+  color: var(--ciruela);
+  font-weight: 600;
+}
+
+.zona-archivo {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  border: 2px dashed var(--malva);
+  border-radius: 14px;
+  background: var(--hoja);
+}
+
+.zona-archivo:focus-within {
+  border-style: solid;
+  border-color: var(--pizarra);
+}
+
+.zona-archivo--error {
+  border-color: var(--ciruela);
+  border-style: solid;
+}
+
+.zona-archivo input[type="file"] {
+  width: 100%;
+  font: inherit;
+  color: var(--texto-suave);
+}
+
+.zona-archivo input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  border: 2px solid var(--ciruela);
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: var(--papel);
+  color: var(--ciruela);
+  font: 700 0.72rem/1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.formulario__pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mensaje {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--rosa-medio);
+  color: var(--ciruela);
+}
+
+/* --- Resultado ---------------------------------------------------------------------------- */
+
+.resultado {
+  padding: 56px 0 96px;
+}
+
+.resultado__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.resultado__cabecera h1 {
+  font-size: clamp(2.6rem, 5vw, 4rem);
+}
+
+.resultado__cabecera p {
+  color: var(--texto-suave);
+}
+
+.resultado__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nota-pegada {
+  position: relative;
+  margin: 0 0 40px;
+  padding: 22px 24px 18px;
+  border: var(--borde);
+  border-radius: 4px;
+  background: var(--rosa-medio);
+}
+
+.nota-pegada::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 96px;
+  height: 22px;
+  background: color-mix(in srgb, var(--pizarra) 70%, transparent);
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.nota-pegada h2 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.nota-pegada ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.agenda {
+  overflow-x: auto;
+}
+
+.agenda table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+.agenda th {
+  padding: 0 12px 10px;
+  border-bottom: var(--borde);
+  font: 700 0.72rem/1.2 var(--sans);
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--ciruela);
+}
+
+.agenda td {
+  padding: 12px;
+  border-bottom: 1px solid var(--rejilla);
+  vertical-align: top;
+}
+
+.agenda tr:last-child td {
+  border-bottom: 0;
+}
+
+.agenda__fecha {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--texto-suave);
+}
+
+.agenda summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--noche);
+}
+
+.agenda__detalle {
+  margin-top: 8px;
+  max-width: 70ch;
+  white-space: pre-line;
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+}
+
+.chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font: 700 0.68rem/1.4 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--papel);
+  background: var(--malva);
+}
+
+.chip--examen {
+  background: var(--ciruela);
+}
+
+.chip--repaso {
+  background: var(--pizarra);
+}
+
+.chip--evaluacion {
+  background: var(--noche);
+}
+
+.chip--universidad {
+  background: var(--rosa-medio);
+  color: var(--ciruela);
+}
+
+/* --- Pie ------------------------------------------------------------------------------------ */
+
+.pie {
+  padding: 32px 0;
+  background: var(--noche);
+  color: var(--rosa-medio);
+  font-size: 0.85rem;
+}
+
+.pie .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.pie .logo {
+  font-size: 1.3rem;
+  color: var(--papel);
+}
+
+/* --- Pantallas angostas --------------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .hero__rejilla,
+  .dividida {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 48px 0 64px;
+  }
+
+  .hero__nota {
+    position: static;
+    margin-top: 8px;
+    font-size: 1.35rem;
+  }
+
+  .hero__nota svg {
+    width: 84px;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .cabecera__nav {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 12px 0 8px;
+  }
+
+  .cabecera__lado,
+  .cabecera__lado--derecha {
+    justify-content: center;
+  }
+
+  .logo {
+    grid-row: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,25 @@
+<div class="semana">
+  <div class="semana__rejilla" role="list">
+    {% for dia in semana.dias %}
+      <div class="dia{% if dia.fecha == hoy %} dia--hoy{% endif %}" role="listitem">
+        <p class="dia__fecha">
+          <span>{{ dia.mes }}<br>{{ dia.fecha|date:"d" }}</span>
+          <span>({{ dia.nombre }})</span>
+        </p>
+        <div class="dia__eventos">
+          {% for evento in dia.eventos|slice:":2" %}
+            <p class="dia__evento">
+              <span class="icono icono--{{ evento.icono }}" aria-hidden="true"><svg><use href="#icono-{{ evento.icono }}"/></svg></span>
+              <span>{{ evento.titulo }}</span>
+            </p>
+          {% empty %}
+            <p class="dia__vacio">Libre</p>
+          {% endfor %}
+          {% if dia.eventos|length > 2 %}
+            <p class="dia__mas">y {{ dia.eventos|length|add:"-2" }} más</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
