@@ -11,3 +11,4 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y l
 - Modelos de periodos, materias, sílabos, actividades y conflictos.
 - Lectura de PDF y contratos del extractor.
 - Integración continua, plantillas de colaboración y documentación de ECS.
+- Análisis de formatos de sílabos y reglas de extracción.
