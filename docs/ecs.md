@@ -5,7 +5,7 @@
 | ECS-01 | Código de la aplicación | `apps/`, `config/`, `templates/` | EuniceVillamar | Git y PR |
 | ECS-02 | Extractor | `extractor/` | EuniceVillamar | Git y PR |
 | ECS-03 | Pruebas | `tests/` | EuniceVillamar | Git y PR |
-| ECS-04 | Muestra de sílabos | `tests/fixtures/silabos/` | EuniceVillamar | Git y PR |
+| ECS-04 | Muestras de prueba (calendarios y resultados esperados) | `tests/fixtures/` | EuniceVillamar | Git y PR |
 | ECS-05 | Migraciones | `apps/*/migrations/` | EuniceVillamar | Git, PR y CI |
 | ECS-06 | Dependencias | `pyproject.toml`, `requirements.lock` | EuniceVillamar | Git y PR |
 | ECS-07 | Infraestructura | `Dockerfile`, `docker-compose.yml`, `.env.example` | EuniceVillamar | Git y PR |

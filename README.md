@@ -28,6 +28,18 @@ Extrae las fechas de sílabos en PDF, permite revisarlas y las reúne en un cale
 
 PostgreSQL se publica en el puerto 5433 para no chocar con una instalación local.
 
+## Generar un calendario
+
+Desde la web, entra en **Generar calendario**, sube el PDF del calendario académico y los sílabos, revisa la vista previa y descarga el `.ics`.
+
+Desde la terminal:
+
+```bash
+python manage.py generar_calendario calendario.pdf silabo1.pdf silabo2.pdf --salida calendario.ics
+```
+
+El archivo se importa en Google Calendar, Outlook o el calendario del teléfono.
+
 ## Pruebas en Windows
 
 Con el contenedor `db` en ejecución:

@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 {% block titulo %}Crear cuenta{% endblock %}
 {% block contenido %}
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <h1 class="h3 mb-3">Crear cuenta</h1>
-      <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Registrarme</button>
-      </form>
-      <p class="mt-3">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+  <section class="pagina-formulario papel">
+    <div class="contenedor">
+      <div class="hoja">
+        <div class="hoja__titulo">
+          <h1>Crear cuenta</h1>
+          <p class="hoja__bajada">Con tu cuenta, la herramienta recuerda tu último calendario.</p>
+        </div>
+        <form method="post" class="formulario">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="formulario__pie">
+            <button class="boton" type="submit">Crear cuenta</button>
+            <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  </section>
 {% endblock %}
