@@ -1,19 +1,27 @@
 /*
-  Cronogramas: papel cuadriculado, hoja de calendario de taco y sellos.
-  Un solo tema claro. La paleta viene de la marca; los tonos intermedios se mezclan desde ella.
+  Cronogramas: estética institucional de la Universidad de Guayaquil (ug.edu.ec).
+  Azules de la marca UG sobre fondos claros, tarjetas blancas redondeadas y un acento dorado.
+  Un solo tema claro. Las fuentes son las propias del proyecto.
 */
 :root {
   color-scheme: light;
-  --papel: #f2e5e4;
-  --ciruela: #593c4f;
-  --noche: #241426;
-  --pizarra: #454259;
-  --malva: #8c6464;
+  --fondo: #f2f5f7;
+  --azul-ug: #183e6f;
+  --marino: #112954;
+  --profundo: #013464;
+  --azul: #075da1;
+  --celeste: #1b78a8;
+  --cian: #29b6e3;
+  --oro: #fbd038;
+  --error: #b42318;
 
-  --hoja: color-mix(in srgb, var(--papel) 45%, #fff);
-  --rosa-medio: color-mix(in srgb, var(--papel) 72%, var(--malva));
-  --rejilla: color-mix(in srgb, var(--malva) 16%, transparent);
-  --texto-suave: color-mix(in srgb, var(--noche) 72%, var(--papel));
+  --hoja: #fff;
+  --hielo: #dfe7f9;
+  --bruma: #ebeff9;
+  --rejilla: color-mix(in srgb, var(--azul-ug) 12%, transparent);
+  --texto-suave: #3d4f66;
+  --sombra: 0 10px 30px -12px color-mix(in srgb, var(--marino) 35%, transparent);
+  --degradado: linear-gradient(135deg, var(--azul-ug) 0%, var(--azul) 100%);
 
   --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --sans: "Albert Sans", "Segoe UI", system-ui, sans-serif;
@@ -21,7 +29,8 @@
   --mano: "Caveat", "Segoe Print", cursive;
 
   --ancho: 1120px;
-  --borde: 2px solid var(--ciruela);
+  --borde: 1px solid var(--hielo);
+  --radio: 20px;
 }
 
 *,
@@ -36,8 +45,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--papel);
-  color: var(--noche);
+  background: var(--fondo);
+  color: var(--marino);
   font: 400 1rem/1.6 var(--sans);
 }
 
@@ -47,12 +56,12 @@ svg {
 }
 
 a {
-  color: var(--ciruela);
+  color: var(--azul-ug);
   text-underline-offset: 3px;
 }
 
 :focus-visible {
-  outline: 3px solid var(--pizarra);
+  outline: 3px solid var(--oro);
   outline-offset: 3px;
 }
 
@@ -63,7 +72,7 @@ h3 {
   font-family: var(--serif);
   font-weight: 400;
   line-height: 1.02;
-  color: var(--ciruela);
+  color: var(--azul-ug);
   text-wrap: balance;
 }
 
@@ -77,24 +86,31 @@ p {
 }
 
 .papel {
-  background-color: var(--papel);
-  background-image:
-    linear-gradient(var(--rejilla) 1px, transparent 1px),
-    linear-gradient(90deg, var(--rejilla) 1px, transparent 1px);
-  background-size: 26px 26px;
+  background: linear-gradient(180deg, var(--hoja) 0%, var(--fondo) 100%);
 }
 
 .etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font: 600 0.75rem/1.2 var(--sans);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ciruela);
+  color: var(--azul);
+}
+
+.etiqueta::before {
+  content: "";
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--azul);
 }
 
 .mano {
   font-family: var(--mano);
   font-weight: 700;
-  color: var(--ciruela);
+  color: var(--azul);
 }
 
 .oculto {
@@ -112,31 +128,32 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 2px solid var(--ciruela);
-  border-radius: 999px;
-  padding: 10px 20px;
-  background: var(--ciruela);
-  color: var(--papel);
-  font: 700 0.78rem/1 var(--sans);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  border: 2px solid var(--azul-ug);
+  border-radius: 8px;
+  padding: 12px 22px;
+  background: var(--azul-ug);
+  color: #fff;
+  font: 600 0.92rem/1 var(--sans);
   text-decoration: none;
   cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .boton:hover {
-  background: var(--noche);
-  border-color: var(--noche);
+  background: var(--profundo);
+  border-color: var(--profundo);
 }
 
 .boton--claro {
-  background: transparent;
-  color: var(--ciruela);
+  border-color: var(--hielo);
+  background: var(--hielo);
+  color: var(--azul-ug);
 }
 
 .boton--claro:hover {
-  background: var(--ciruela);
-  color: var(--papel);
+  border-color: var(--azul-ug);
+  background: var(--hoja);
+  color: var(--azul-ug);
 }
 
 .boton-enlace {
@@ -150,21 +167,21 @@ p {
   cursor: pointer;
 }
 
-/* --- Cabecera con borde festoneado -------------------------------------------------------- */
+/* --- Cabecera blanca con franja azul, como ug.edu.ec ---------------------------------------- */
 
 .cabecera {
-  position: relative;
-  z-index: 2;
-  background: var(--rosa-medio);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--hoja);
+  box-shadow: 0 2px 12px -6px color-mix(in srgb, var(--marino) 40%, transparent);
 }
 
 .cabecera::after {
   content: "";
-  position: absolute;
-  inset: 100% 0 auto;
-  height: 12px;
-  background: radial-gradient(circle at 12px 0, var(--rosa-medio) 12px, transparent 12.5px) 0 0 /
-    24px 12px repeat-x;
+  display: block;
+  height: 6px;
+  background: linear-gradient(90deg, var(--profundo), var(--azul) 60%, var(--cian));
 }
 
 .cabecera__nav {
@@ -172,17 +189,15 @@ p {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 16px;
-  min-height: 64px;
+  min-height: 72px;
 }
 
 .cabecera__lado {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 24px;
-  font: 600 0.74rem/1.2 var(--sans);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  gap: 8px 28px;
+  font: 500 0.95rem/1.2 var(--sans);
 }
 
 .cabecera__lado--derecha {
@@ -191,14 +206,15 @@ p {
 
 .cabecera__lado a,
 .cabecera__lado .boton-enlace {
-  color: var(--ciruela);
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+  color: var(--azul-ug);
   text-decoration: none;
-  text-transform: uppercase;
 }
 
 .cabecera__lado a:hover,
 .cabecera__lado .boton-enlace:hover {
-  text-decoration: underline;
+  border-bottom-color: var(--oro);
 }
 
 .cabecera__usuario {
@@ -208,7 +224,7 @@ p {
 .logo {
   font: 700 1.9rem/1 var(--logo);
   letter-spacing: -0.02em;
-  color: var(--ciruela);
+  color: var(--azul-ug);
   text-decoration: none;
 }
 
@@ -266,7 +282,7 @@ p {
   width: 120px;
   height: 56px;
   fill: none;
-  stroke: var(--ciruela);
+  stroke: var(--azul-ug);
   stroke-width: 2.5;
   stroke-linecap: round;
 }
@@ -284,97 +300,98 @@ p {
 }
 
 .hi-sombra {
-  fill: var(--ciruela);
+  fill: var(--hielo);
 }
 
 .hi-hoja {
   fill: var(--hoja);
-  stroke: var(--ciruela);
+  stroke: var(--azul-ug);
   stroke-width: 3;
 }
 
 .hi-banda {
-  fill: var(--ciruela);
+  fill: var(--azul-ug);
 }
 
 .hi-anillo {
-  fill: var(--noche);
+  fill: var(--marino);
 }
 
 .hi-mes {
   font: 400 40px/1 var(--serif);
-  fill: var(--papel);
+  fill: #fff;
 }
 
 .hi-anio {
   font: 600 12px/1 var(--sans);
   letter-spacing: 0.14em;
-  fill: var(--rosa-medio);
+  fill: var(--hielo);
 }
 
 .hi-inicial {
   font: 700 13px/1 var(--sans);
-  fill: var(--malva);
+  fill: var(--celeste);
 }
 
 .hi-dia {
   font: 500 17px/1 var(--sans);
-  fill: var(--noche);
+  fill: var(--marino);
 }
 
 .hi-dia--feriado {
-  fill: var(--malva);
+  fill: var(--celeste);
 }
 
 .hi-trazo {
   fill: none;
-  stroke: var(--pizarra);
+  stroke: var(--azul);
   stroke-width: 3;
   stroke-linecap: round;
 }
 
 .hi-nota {
   font: 700 24px/1 var(--mano);
-  fill: var(--pizarra);
+  fill: var(--azul);
 }
 
 .hi-flecha {
   fill: none;
-  stroke: var(--pizarra);
+  stroke: var(--azul);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .hi-estrella {
-  fill: var(--malva);
+  fill: var(--oro);
 }
 
 .hi-lapiz {
-  fill: var(--pizarra);
+  fill: var(--azul);
 }
 
 .hi-punta {
-  fill: var(--noche);
+  fill: var(--marino);
 }
 
-/* --- Hoja de taco: tarjeta con agujeros arriba ------------------------------------------------ */
+/* --- Hoja: tarjeta blanca redondeada con filete dorado ------------------------------------------ */
 
 .hoja {
   position: relative;
+  overflow: hidden;
   border: var(--borde);
-  border-radius: 6px;
+  border-radius: var(--radio);
   background: var(--hoja);
   padding: 48px clamp(16px, 4vw, 48px) 36px;
+  box-shadow: var(--sombra);
 }
 
 .hoja::before {
   content: "";
   position: absolute;
-  inset: -13px 18px auto;
-  height: 26px;
-  background: radial-gradient(circle, var(--agujero, var(--ciruela)) 12px, transparent 12.5px) 0 0 /
-    34px 26px repeat-x;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, var(--azul-ug), var(--azul) 70%, var(--oro));
 }
 
 .hoja__titulo {
@@ -403,16 +420,15 @@ p {
 /* --- Franja "Esta semana" ------------------------------------------------------------------- */
 
 .franja {
-  padding: 64px 0;
+  padding: 72px 0;
 }
 
-.franja--ciruela {
-  background: var(--ciruela);
-  --agujero: var(--ciruela);
+.franja--marina {
+  background: var(--degradado);
 }
 
-.franja--pizarra {
-  background: var(--pizarra);
+.franja--azul {
+  background: linear-gradient(135deg, var(--azul) 0%, var(--celeste) 100%);
 }
 
 .semana {
@@ -423,7 +439,9 @@ p {
   display: grid;
   grid-template-columns: repeat(7, minmax(104px, 1fr));
   min-width: 728px;
+  overflow: hidden;
   border: var(--borde);
+  border-radius: 14px;
 }
 
 .dia {
@@ -444,17 +462,23 @@ p {
   justify-content: space-between;
   font: 700 0.7rem/1.25 var(--sans);
   letter-spacing: 0.06em;
-  color: var(--ciruela);
+  color: var(--azul-ug);
 }
 
-.dia--hoy {
-  background: var(--ciruela);
+.dia:nth-child(even) {
+  background: color-mix(in srgb, var(--bruma) 55%, #fff);
+}
+
+.dia--hoy,
+.dia--hoy:nth-child(even) {
+  background: var(--azul-ug);
+  box-shadow: inset 0 4px 0 var(--oro);
 }
 
 .dia--hoy .dia__fecha,
 .dia--hoy .dia__evento,
 .dia--hoy .dia__vacio {
-  color: var(--papel);
+  color: #fff;
 }
 
 .dia__eventos {
@@ -471,7 +495,7 @@ p {
   gap: 6px;
   font-size: 0.82rem;
   line-height: 1.25;
-  color: var(--ciruela);
+  color: var(--azul-ug);
 }
 
 .dia__vacio {
@@ -491,8 +515,8 @@ p {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: var(--papel);
-  background: var(--malva);
+  color: #fff;
+  background: var(--celeste);
 }
 
 .icono svg {
@@ -506,28 +530,28 @@ p {
 }
 
 .icono--examen {
-  background: var(--ciruela);
+  background: var(--azul-ug);
 }
 
 .icono--repaso {
-  background: var(--pizarra);
+  background: var(--azul);
 }
 
 .icono--unidad {
-  background: var(--malva);
+  background: var(--celeste);
 }
 
 .icono--evaluacion {
-  background: var(--noche);
+  background: var(--marino);
 }
 
 .icono--universidad {
-  background: var(--rosa-medio);
-  color: var(--ciruela);
+  background: var(--hielo);
+  color: var(--azul-ug);
 }
 
 .dia--hoy .icono {
-  box-shadow: 0 0 0 2px var(--papel);
+  box-shadow: 0 0 0 2px #fff;
 }
 
 .semana__pie {
@@ -544,10 +568,22 @@ p {
   gap: 12px 24px;
   margin-top: 28px;
   padding: 16px 24px;
-  border-radius: 20px;
-  background: var(--rosa-medio);
-  color: var(--ciruela);
+  border-left: 5px solid var(--oro);
+  border-radius: 14px;
+  background: color-mix(in srgb, #fff 12%, transparent);
+  color: #fff;
   text-align: center;
+}
+
+.aviso-pildora .boton {
+  border-color: #fff;
+  background: #fff;
+  color: var(--azul-ug);
+}
+
+.aviso-pildora .boton:hover {
+  border-color: var(--oro);
+  background: var(--oro);
 }
 
 .aviso-pildora p {
@@ -583,7 +619,9 @@ p {
   display: grid;
   place-items: center;
   padding: 64px 24px;
-  background: repeating-linear-gradient(90deg, var(--rosa-medio) 0 14px, var(--papel) 14px 28px);
+  background:
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--cian) 35%, transparent) 0, transparent 45%),
+    linear-gradient(160deg, var(--bruma) 0%, var(--hielo) 100%);
 }
 
 .sellos {
@@ -595,12 +633,13 @@ p {
 .sello {
   display: grid;
   place-content: center;
-  width: 108px;
+  gap: 4px;
+  width: 116px;
   height: 108px;
+  border-radius: 16px;
   text-align: center;
-  color: var(--papel);
-  -webkit-mask: var(--forma) center / contain no-repeat;
-  mask: var(--forma) center / contain no-repeat;
+  color: #fff;
+  box-shadow: var(--sombra);
 }
 
 .sello strong {
@@ -614,58 +653,43 @@ p {
 }
 
 .sello--flor {
-  background: var(--malva);
-  --forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40'/%3E%3Ccircle cx='90' cy='50' r='10'/%3E%3Ccircle cx='84.6' cy='70' r='10'/%3E%3Ccircle cx='70' cy='84.6' r='10'/%3E%3Ccircle cx='50' cy='90' r='10'/%3E%3Ccircle cx='30' cy='84.6' r='10'/%3E%3Ccircle cx='15.4' cy='70' r='10'/%3E%3Ccircle cx='10' cy='50' r='10'/%3E%3Ccircle cx='15.4' cy='30' r='10'/%3E%3Ccircle cx='30' cy='15.4' r='10'/%3E%3Ccircle cx='50' cy='10' r='10'/%3E%3Ccircle cx='70' cy='15.4' r='10'/%3E%3Ccircle cx='84.6' cy='30' r='10'/%3E%3C/svg%3E");
+  background: linear-gradient(135deg, var(--azul-ug), var(--marino));
 }
 
 .sello--nube {
-  background: var(--noche);
-  --forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34'/%3E%3Ccircle cx='50' cy='17' r='17'/%3E%3Ccircle cx='83' cy='50' r='17'/%3E%3Ccircle cx='50' cy='83' r='17'/%3E%3Ccircle cx='17' cy='50' r='17'/%3E%3Ccircle cx='73.3' cy='26.7' r='17'/%3E%3Ccircle cx='73.3' cy='73.3' r='17'/%3E%3Ccircle cx='26.7' cy='73.3' r='17'/%3E%3Ccircle cx='26.7' cy='26.7' r='17'/%3E%3C/svg%3E");
+  background: linear-gradient(135deg, var(--azul), var(--celeste));
 }
 
 .sello--pastilla {
-  background: var(--rosa-medio);
-  color: var(--ciruela);
-  --forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='6' y='6' width='88' height='88' rx='22'/%3E%3Ccircle cx='28' cy='8' r='8'/%3E%3Ccircle cx='50' cy='8' r='8'/%3E%3Ccircle cx='72' cy='8' r='8'/%3E%3Ccircle cx='28' cy='92' r='8'/%3E%3Ccircle cx='50' cy='92' r='8'/%3E%3Ccircle cx='72' cy='92' r='8'/%3E%3Ccircle cx='8' cy='28' r='8'/%3E%3Ccircle cx='8' cy='50' r='8'/%3E%3Ccircle cx='8' cy='72' r='8'/%3E%3Ccircle cx='92' cy='28' r='8'/%3E%3Ccircle cx='92' cy='50' r='8'/%3E%3Ccircle cx='92' cy='72' r='8'/%3E%3C/svg%3E");
+  background: var(--hoja);
+  color: var(--azul-ug);
+  border: 2px solid var(--hielo);
 }
 
 .polaroid {
   position: relative;
   width: min(100%, 360px);
-  padding: 22px 22px 26px;
+  padding: 24px 24px 28px 30px;
   border: var(--borde);
-  border-radius: 4px;
+  border-radius: var(--radio);
   background: var(--hoja);
-  transform: rotate(-3deg);
-  box-shadow: 10px 10px 0 var(--ciruela);
-}
-
-.polaroid::before,
-.polaroid::after {
-  content: "";
-  position: absolute;
-  width: 74px;
-  height: 22px;
-  background: color-mix(in srgb, var(--malva) 80%, transparent);
+  box-shadow: var(--sombra);
 }
 
 .polaroid::before {
-  top: -10px;
-  left: -18px;
-  transform: rotate(-32deg);
-}
-
-.polaroid::after {
-  right: -16px;
-  bottom: -6px;
-  transform: rotate(-28deg);
+  content: "";
+  position: absolute;
+  inset: 20px auto 20px 0;
+  width: 5px;
+  border-radius: 0 4px 4px 0;
+  background: var(--azul);
 }
 
 .polaroid__fecha {
   font: 700 0.7rem/1.2 var(--sans);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--malva);
+  color: var(--celeste);
 }
 
 .polaroid h3 {
@@ -684,50 +708,29 @@ p {
 .polaroid__firma {
   position: absolute;
   right: -10px;
-  bottom: -46px;
+  bottom: -40px;
   padding: 6px 14px;
-  border: 1.5px solid var(--ciruela);
-  border-radius: 4px;
-  background: var(--hoja);
+  border-radius: 8px;
+  background: var(--oro);
   font: 700 1.25rem/1.1 var(--mano);
-  color: var(--ciruela);
-  transform: rotate(6deg);
+  color: var(--azul-ug);
+  box-shadow: var(--sombra);
 }
 
 .cuadros {
-  height: 26px;
-  background:
-    conic-gradient(var(--ciruela) 25%, var(--rosa-medio) 0 50%, var(--ciruela) 0 75%, var(--rosa-medio) 0)
-    0 0 / 26px 26px;
+  height: 8px;
+  background: linear-gradient(90deg, var(--profundo), var(--azul-ug) 25%, var(--azul) 50%, var(--celeste) 75%, var(--cian));
 }
 
-/* --- Nube festoneada en la franja pizarra ------------------------------------------------- */
+/* --- Panel blanco sobre la franja azul ---------------------------------------------------- */
 
 .nube {
   position: relative;
-  margin: 24px 0;
   padding: 56px clamp(20px, 5vw, 72px);
-  background: var(--papel);
+  border-radius: var(--radio);
+  background: var(--hoja);
   text-align: center;
-}
-
-.nube::before,
-.nube::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 40px;
-  background: radial-gradient(circle at 20px 20px, var(--papel) 20px, transparent 20.5px) 0 0 /
-    40px 40px repeat-x;
-}
-
-.nube::before {
-  top: -20px;
-}
-
-.nube::after {
-  bottom: -20px;
+  box-shadow: var(--sombra);
 }
 
 .nube h2 {
@@ -751,6 +754,9 @@ p {
   grid-template-rows: auto auto 1fr;
   align-content: start;
   gap: 8px;
+  padding: 22px;
+  border-radius: 16px;
+  background: var(--fondo);
   counter-increment: paso;
 }
 
@@ -760,16 +766,16 @@ p {
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  background: var(--pizarra);
-  color: var(--papel);
+  border-radius: 12px;
+  background: var(--degradado);
+  color: #fff;
   font: 400 1.5rem/1 var(--serif);
 }
 
 .pasos strong {
   display: block;
   font: 400 1.5rem/1.1 var(--serif);
-  color: var(--ciruela);
+  color: var(--azul-ug);
 }
 
 .pasos p {
@@ -794,10 +800,12 @@ p {
 }
 
 .periodo {
-  padding: 20px;
+  padding: 22px;
   border: var(--borde);
-  border-radius: 6px;
+  border-top: 4px solid var(--azul);
+  border-radius: 16px;
   background: var(--hoja);
+  box-shadow: var(--sombra);
 }
 
 .periodo h3 {
@@ -833,7 +841,7 @@ p {
 
 .formulario label {
   font-weight: 600;
-  color: var(--ciruela);
+  color: var(--azul-ug);
 }
 
 .formulario input[type="text"],
@@ -842,11 +850,17 @@ p {
 .formulario input[type="number"] {
   width: 100%;
   padding: 11px 14px;
-  border: var(--borde);
-  border-radius: 10px;
+  border: 1.5px solid color-mix(in srgb, var(--azul-ug) 28%, #fff);
+  border-radius: 8px;
   background: #fff;
-  color: var(--noche);
+  color: var(--marino);
   font: inherit;
+}
+
+.formulario input:focus {
+  border-color: var(--azul);
+  outline: 3px solid color-mix(in srgb, var(--azul) 25%, transparent);
+  outline-offset: 0;
 }
 
 .formulario .helptext,
@@ -863,7 +877,7 @@ p {
 
 .formulario .errorlist,
 .error {
-  color: var(--ciruela);
+  color: var(--error);
   font-weight: 600;
 }
 
@@ -872,18 +886,18 @@ p {
   display: grid;
   gap: 4px;
   padding: 18px;
-  border: 2px dashed var(--malva);
+  border: 2px dashed color-mix(in srgb, var(--azul) 45%, #fff);
   border-radius: 14px;
-  background: var(--hoja);
+  background: var(--fondo);
 }
 
 .zona-archivo:focus-within {
   border-style: solid;
-  border-color: var(--pizarra);
+  border-color: var(--azul);
 }
 
 .zona-archivo--error {
-  border-color: var(--ciruela);
+  border-color: var(--error);
   border-style: solid;
 }
 
@@ -895,14 +909,12 @@ p {
 
 .zona-archivo input[type="file"]::file-selector-button {
   margin-right: 12px;
-  border: 2px solid var(--ciruela);
-  border-radius: 999px;
-  padding: 8px 16px;
-  background: var(--papel);
-  color: var(--ciruela);
-  font: 700 0.72rem/1 var(--sans);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: var(--azul-ug);
+  color: #fff;
+  font: 600 0.85rem/1 var(--sans);
   cursor: pointer;
 }
 
@@ -916,9 +928,10 @@ p {
 
 .mensaje {
   padding: 12px 16px;
-  border-radius: 10px;
-  background: var(--rosa-medio);
-  color: var(--ciruela);
+  border-left: 4px solid var(--azul);
+  border-radius: 8px;
+  background: var(--bruma);
+  color: var(--azul-ug);
 }
 
 /* --- Resultado ---------------------------------------------------------------------------- */
@@ -954,20 +967,10 @@ p {
   position: relative;
   margin: 0 0 40px;
   padding: 22px 24px 18px;
-  border: var(--borde);
-  border-radius: 4px;
-  background: var(--rosa-medio);
-}
-
-.nota-pegada::before {
-  content: "";
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  width: 96px;
-  height: 22px;
-  background: color-mix(in srgb, var(--pizarra) 70%, transparent);
-  transform: translateX(-50%) rotate(-3deg);
+  border: 1px solid color-mix(in srgb, var(--oro) 60%, #fff);
+  border-left: 6px solid var(--oro);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--oro) 12%, #fff);
 }
 
 .nota-pegada h2 {
@@ -999,7 +1002,7 @@ p {
   letter-spacing: 0.1em;
   text-align: left;
   text-transform: uppercase;
-  color: var(--ciruela);
+  color: var(--azul-ug);
 }
 
 .agenda td {
@@ -1021,7 +1024,7 @@ p {
 .agenda summary {
   cursor: pointer;
   font-weight: 600;
-  color: var(--noche);
+  color: var(--marino);
 }
 
 .agenda__detalle {
@@ -1040,46 +1043,48 @@ p {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--papel);
-  background: var(--malva);
+  color: #fff;
+  background: var(--celeste);
 }
 
 .chip--examen {
-  background: var(--ciruela);
+  background: var(--azul-ug);
 }
 
 .chip--repaso {
-  background: var(--pizarra);
+  background: var(--azul);
 }
 
 .chip--evaluacion {
-  background: var(--noche);
+  background: var(--marino);
 }
 
 .chip--universidad {
-  background: var(--rosa-medio);
-  color: var(--ciruela);
+  background: var(--hielo);
+  color: var(--azul-ug);
 }
 
 /* --- Pie ------------------------------------------------------------------------------------ */
 
 .pie {
-  padding: 32px 0;
-  background: var(--noche);
-  color: var(--rosa-medio);
+  padding: 36px 0;
+  border-bottom: 10px solid var(--profundo);
+  background: var(--azul);
+  color: var(--hielo);
   font-size: 0.85rem;
 }
 
 .pie .contenedor {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: 8px 24px;
 }
 
 .pie .logo {
   font-size: 1.3rem;
-  color: var(--papel);
+  color: #fff;
 }
 
 /* --- Pantallas angostas --------------------------------------------------------------------- */
@@ -1110,6 +1115,10 @@ p {
 }
 
 @media (max-width: 640px) {
+  .cabecera {
+    position: relative;
+  }
+
   .cabecera__nav {
     grid-template-columns: 1fr;
     justify-items: center;
